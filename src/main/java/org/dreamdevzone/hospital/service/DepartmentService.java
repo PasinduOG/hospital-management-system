@@ -10,4 +10,5 @@ public interface DepartmentService {
     DepartmentDto searchDepartment(UUID uuid);
     void deleteDepartment(UUID uuid);
     List<DepartmentDto> getDepartments();
+    void updateDepartmnt(DepartmentDto dto, UUID uuid);
 }
