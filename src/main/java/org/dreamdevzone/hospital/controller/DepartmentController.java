@@ -25,7 +25,7 @@ public class DepartmentController {
     public void deleteDepartment(@PathVariable UUID id){
         service.deleteDepartment(id);
     }
-    @GetMapping()
+    @GetMapping
     public List<DepartmentDto> getDepartments(){
         return service.getDepartments();
     }

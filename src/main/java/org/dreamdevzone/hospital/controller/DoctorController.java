@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("doctor")
+@RequestMapping("/doctor")
 public class DoctorController {
     private final DoctorService service;
     @PostMapping()
@@ -25,7 +25,7 @@ public class DoctorController {
     public void deleteDoctor(@PathVariable UUID id){
         service.deleteDoctor(id);
     }
-    @GetMapping()
+    @GetMapping
     public List<DoctorDto> getDoctor(){
         return service.getDoctors();
     }
