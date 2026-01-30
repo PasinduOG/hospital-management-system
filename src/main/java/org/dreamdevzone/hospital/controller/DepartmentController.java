@@ -17,7 +17,7 @@ public class DepartmentController {
     public void addDepartment(@RequestBody DepartmentDto dto){
         service.addDepartment(dto);
     }
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public DepartmentDto searchDepartment(@PathVariable UUID id){
         return service.searchDepartment(id);
     }
