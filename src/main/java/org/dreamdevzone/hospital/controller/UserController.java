@@ -40,6 +40,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     ResponseEntity<@NotNull ApiResponse<Void>> remove(@PathVariable UUID id){
+        service.deleteUser(id);
         return ApiResponse.success("User removed");
     }
 }
