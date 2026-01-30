@@ -23,10 +23,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserDto userDto, UUID uuid) {
+    public UserDto updateUser(UserDto userDto, UUID uuid) {
         if (!repository.existsById(uuid)) throw new BaseNotFoundException("User not found!");
         userDto.setId(uuid);
-        repository.save(mapper.toEntity(userDto));
+        return mapper.toDto(repository.save(mapper.toEntity(userDto)));
     }
 
     @Override
