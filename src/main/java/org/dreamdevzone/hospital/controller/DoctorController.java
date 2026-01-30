@@ -29,7 +29,7 @@ public class DoctorController {
     public List<DoctorDto> getDoctor(){
         return service.getDoctors();
     }
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public void updateDoctor(@RequestBody DoctorDto dto,@PathVariable UUID id){
         service.updateDoctor(dto,id);
     }
