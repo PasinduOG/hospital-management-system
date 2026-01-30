@@ -1,5 +1,6 @@
 package org.dreamdevzone.hospital.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.PatientDto;
 import org.dreamdevzone.hospital.service.PatientService;
@@ -18,7 +19,7 @@ public class PatientController {
     private final PatientService service;
 
     @PostMapping
-    ResponseEntity<@NotNull ApiResponse<PatientDto>> add(@RequestBody PatientDto patientDto){
+    ResponseEntity<@NotNull ApiResponse<PatientDto>> add(@Valid @RequestBody PatientDto patientDto){
         return ApiResponse.created("Patient created!", service.addPatient(patientDto));
     }
 
@@ -33,7 +34,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<@NotNull ApiResponse<PatientDto>> update(@RequestBody PatientDto patientDto, @PathVariable UUID id){
+    ResponseEntity<@NotNull ApiResponse<PatientDto>> update(@Valid @RequestBody PatientDto patientDto, @PathVariable UUID id){
         return ApiResponse.success("Patient updated!", service.updatePatient(patientDto, id));
     }
 

@@ -1,5 +1,6 @@
 package org.dreamdevzone.hospital.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.BillDto;
 import org.dreamdevzone.hospital.service.impl.BillImpl;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class BillController {
     private final BillImpl service;
     @PostMapping
-    public void addBill(@RequestBody BillDto dto){
+    public void addBill(@Valid @RequestBody BillDto dto){
         service.addBill(dto);
     }
     @GetMapping("/{id}")
@@ -30,7 +31,7 @@ public class BillController {
         return service.getAllBills();
     }
     @PutMapping("/{id}")
-    public BillDto updateBill(@RequestBody BillDto dto,@PathVariable UUID id){
+    public BillDto updateBill(@Valid @RequestBody BillDto dto,@PathVariable UUID id){
         return service.updateBill(dto,id);
     }
 }

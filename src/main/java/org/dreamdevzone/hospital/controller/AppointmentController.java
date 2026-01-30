@@ -1,5 +1,6 @@
 package org.dreamdevzone.hospital.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
 import org.dreamdevzone.hospital.service.impl.AppointmentImpl;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class AppointmentController {
     private final AppointmentImpl service;
     @PostMapping
-    public void addAppointment(@RequestBody AppointmentDto dto){
+    public void addAppointment(@Valid @RequestBody AppointmentDto dto){
         service.addAppointment(dto);
     }
     @GetMapping("/{id}")
@@ -30,7 +31,7 @@ public class AppointmentController {
         return service.getAllAppointments();
     }
     @PutMapping("/{id}")
-    public AppointmentDto updateAppointment(@RequestBody AppointmentDto dto,@PathVariable UUID id){
+    public AppointmentDto updateAppointment(@Valid @RequestBody AppointmentDto dto,@PathVariable UUID id){
         return service.updateAppointment(dto,id);
     }
 }
