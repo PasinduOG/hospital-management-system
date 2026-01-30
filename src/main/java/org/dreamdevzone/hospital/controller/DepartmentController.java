@@ -29,7 +29,7 @@ public class DepartmentController {
     public List<DepartmentDto> getDepartments(){
         return service.getDepartments();
     }
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public void updateDepartment(@RequestBody DepartmentDto dto,@PathVariable UUID id){
         service.updateDepartmnt(dto,id);
     }
