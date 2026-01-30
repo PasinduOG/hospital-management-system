@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 @Service
 @RequiredArgsConstructor
-public class AppointmentImpl implements AppointmentService {
+public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository repository;
     private final AppointmentMapper mapper;
     @Override

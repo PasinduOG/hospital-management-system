@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class BillImpl implements BillService {
+public class BillServiceImpl implements BillService {
     private final BillRepository repository;
     private final BillMapper mapper;
     @Override

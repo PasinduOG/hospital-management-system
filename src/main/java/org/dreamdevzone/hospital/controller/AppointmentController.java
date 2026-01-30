@@ -3,7 +3,7 @@ package org.dreamdevzone.hospital.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
-import org.dreamdevzone.hospital.service.impl.AppointmentImpl;
+import org.dreamdevzone.hospital.service.AppointmentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/appointment")
 public class AppointmentController {
-    private final AppointmentImpl service;
+    private final AppointmentService service;
     @PostMapping
     public void addAppointment(@Valid @RequestBody AppointmentDto dto){
         service.addAppointment(dto);

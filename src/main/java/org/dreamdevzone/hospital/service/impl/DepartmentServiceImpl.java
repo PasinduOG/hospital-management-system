@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 @Service
 @RequiredArgsConstructor
-public class DepartmentImpl implements DepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository repository;
     private final DepartmentMapper mapper;
     @Override
