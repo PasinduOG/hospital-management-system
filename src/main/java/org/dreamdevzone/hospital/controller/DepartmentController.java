@@ -36,7 +36,7 @@ public class DepartmentController {
 
     @GetMapping
     ResponseEntity<@NotNull ApiResponse<List<DepartmentDto>>> getDepartments(){
-        return ApiResponse.success("Fetched departments", service.getDepartments());
+        return ApiResponse.success("Fetched departments!", service.getDepartments());
     }
 
     @PutMapping("/{id}")
