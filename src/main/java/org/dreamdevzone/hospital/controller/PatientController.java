@@ -27,8 +27,8 @@ public class PatientController {
         return ApiResponse.success("Patient fetched!", service.getPatient(id));
     }
 
-    @GetMapping("/{id}")
-    ResponseEntity<@NotNull ApiResponse<List<PatientDto>>> getAll(@PathVariable UUID id){
+    @GetMapping
+    ResponseEntity<@NotNull ApiResponse<List<PatientDto>>> getAll(){
         return ApiResponse.success("Fetched patients!", service.getAllPatients());
     }
 
