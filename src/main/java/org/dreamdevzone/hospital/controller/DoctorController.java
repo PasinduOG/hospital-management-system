@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("/doctor")
 public class DoctorController {
     private final DoctorService service;
-    @PostMapping()
+    @PostMapping
     public void addDoctor(@RequestBody DoctorDto dto){
         service.addDoctor(dto);
     }
