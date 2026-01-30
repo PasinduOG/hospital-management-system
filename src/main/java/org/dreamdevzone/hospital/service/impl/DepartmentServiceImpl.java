@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
@@ -23,7 +24,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDto searchDepartment(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()-> new BaseNotFoundException("Department not found!")));
+        return mapper.toDto(repository.findById(uuid)
+                .orElseThrow(() -> new BaseNotFoundException("Department not found!")));
     }
 
     @Override
@@ -38,7 +40,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDto updateDepartmnt(DepartmentDto dto, UUID uuid) {
-        if(!repository.existsById(uuid)) throw new BaseNotFoundException("Department not found!");
+        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Department not found!");
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

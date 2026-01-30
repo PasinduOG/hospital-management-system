@@ -10,19 +10,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 public class DoctorServiceImpl implements DoctorService {
     private final DoctorMapper mapper;
     private final DoctorRepository repository;
+
     @Override
-    public void addDoctor(DoctorDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public DoctorDto addDoctor(DoctorDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public DoctorDto searchDoctor(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()-> new BaseNotFoundException("Doctor not found!")));
+        return mapper.toDto(repository.findById(uuid)
+                .orElseThrow(() -> new BaseNotFoundException("Doctor not found!")));
     }
 
     @Override
@@ -36,9 +39,9 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public void updateDoctor(DoctorDto dto, UUID id) {
-        if (!repository.existsById(id)) throw  new BaseNotFoundException("Doctor not found!");
+    public DoctorDto updateDoctor(DoctorDto dto, UUID id) {
+        if (!repository.existsById(id)) throw new BaseNotFoundException("Doctor not found!");
         dto.setId(id);
-        repository.save(mapper.toEntity(dto));
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 }
