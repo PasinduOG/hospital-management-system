@@ -1,5 +1,6 @@
 package org.dreamdevzone.hospital.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.DoctorDto;
 import org.dreamdevzone.hospital.service.DoctorService;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class DoctorController {
     private final DoctorService service;
     @PostMapping
-    public void addDoctor(@RequestBody DoctorDto dto){
+    public void addDoctor(@Valid @RequestBody DoctorDto dto){
         service.addDoctor(dto);
     }
     @GetMapping("/{id}")
@@ -30,7 +31,7 @@ public class DoctorController {
         return service.getDoctors();
     }
     @PutMapping("/{id}")
-    public void updateDoctor(@RequestBody DoctorDto dto,@PathVariable UUID id){
+    public void updateDoctor(@Valid @RequestBody DoctorDto dto, @PathVariable UUID id){
         service.updateDoctor(dto,id);
     }
 }
