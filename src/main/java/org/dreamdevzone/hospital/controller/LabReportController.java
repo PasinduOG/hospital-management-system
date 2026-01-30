@@ -3,7 +3,7 @@ package org.dreamdevzone.hospital.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.LabReportDto;
-import org.dreamdevzone.hospital.service.impl.LabReportServiceImpl;
+import org.dreamdevzone.hospital.service.LabReportService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/labReport")
 public class LabReportController {
-    private final LabReportServiceImpl service;
+    private final LabReportService service;
     @PostMapping
     public void addLabReport(@Valid @RequestBody LabReportDto dto){
         service.addLabReport(dto);
