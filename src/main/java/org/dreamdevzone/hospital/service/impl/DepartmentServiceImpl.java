@@ -15,9 +15,10 @@ import java.util.UUID;
 public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository repository;
     private final DepartmentMapper mapper;
+
     @Override
-    public void addDepartment(DepartmentDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public DepartmentDto addDepartment(DepartmentDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
@@ -36,9 +37,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void updateDepartmnt(DepartmentDto dto, UUID uuid) {
+    public DepartmentDto updateDepartmnt(DepartmentDto dto, UUID uuid) {
         if(!repository.existsById(uuid)) throw new BaseNotFoundException("Department not found!");
         dto.setId(uuid);
-        repository.save(mapper.toEntity(dto));
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 }

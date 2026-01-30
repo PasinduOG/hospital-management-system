@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface DepartmentService {
-    void addDepartment(DepartmentDto dto);
+    DepartmentDto addDepartment(DepartmentDto dto);
     DepartmentDto searchDepartment(UUID uuid);
     void deleteDepartment(UUID uuid);
     List<DepartmentDto> getDepartments();
-    void updateDepartmnt(DepartmentDto dto, UUID uuid);
+    DepartmentDto updateDepartmnt(DepartmentDto dto, UUID uuid);
 }

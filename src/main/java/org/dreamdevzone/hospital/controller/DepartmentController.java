@@ -4,6 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.DepartmentDto;
 import org.dreamdevzone.hospital.service.impl.DepartmentServiceImpl;
+import org.dreamdevzone.hospital.util.ApiResponse;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,24 +17,30 @@ import java.util.UUID;
 @RequestMapping("/department")
 public class DepartmentController {
     private final DepartmentServiceImpl service;
+
     @PostMapping
-    public void addDepartment(@Valid @RequestBody DepartmentDto dto){
-        service.addDepartment(dto);
+    ResponseEntity<@NotNull ApiResponse<DepartmentDto>> addDepartment(@Valid @RequestBody DepartmentDto dto){
+        return ApiResponse.created("Department created!", service.addDepartment(dto));
     }
+
     @GetMapping("/{id}")
-    public DepartmentDto searchDepartment(@PathVariable UUID id){
-        return service.searchDepartment(id);
+    ResponseEntity<@NotNull ApiResponse<DepartmentDto>> searchDepartment(@PathVariable UUID id){
+        return ApiResponse.success("Department fetched!", service.searchDepartment(id));
     }
+
     @DeleteMapping("/{id}")
-    public void deleteDepartment(@PathVariable UUID id){
+    ResponseEntity<@NotNull ApiResponse<Void>> deleteDepartment(@PathVariable UUID id){
         service.deleteDepartment(id);
+        return ApiResponse.success("Department removed!");
     }
+
     @GetMapping
-    public List<DepartmentDto> getDepartments(){
-        return service.getDepartments();
+    ResponseEntity<@NotNull ApiResponse<List<DepartmentDto>>> getDepartments(){
+        return ApiResponse.success("Fetched departments", service.getDepartments());
     }
+
     @PutMapping("/{id}")
-    public void updateDepartment(@Valid @RequestBody DepartmentDto dto,@PathVariable UUID id){
-        service.updateDepartmnt(dto,id);
+    ResponseEntity<@NotNull ApiResponse<DepartmentDto>> updateDepartment(@Valid @RequestBody DepartmentDto dto,@PathVariable UUID id){
+        return ApiResponse.success("Department updated!", service.updateDepartmnt(dto,id));
     }
 }
