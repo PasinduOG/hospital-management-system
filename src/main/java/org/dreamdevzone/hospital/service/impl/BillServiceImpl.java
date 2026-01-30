@@ -16,14 +16,16 @@ import java.util.UUID;
 public class BillServiceImpl implements BillService {
     private final BillRepository repository;
     private final BillMapper mapper;
+
     @Override
-    public void addBill(BillDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public BillDto addBill(BillDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public BillDto getBill(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()->new BaseNotFoundException("Bill not found!")));
+        return mapper.toDto(repository.findById(uuid)
+                .orElseThrow(() -> new BaseNotFoundException("Bill not found!")));
     }
 
     @Override
@@ -38,7 +40,7 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public BillDto updateBill(BillDto dto, UUID uuid) {
-        if(!repository.existsById(uuid)) throw new BaseNotFoundException("Bill not found!");
+        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Bill not found!");
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
