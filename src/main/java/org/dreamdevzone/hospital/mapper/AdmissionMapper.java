@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface AdmissionsMapper {
+public interface AdmissionMapper {
     Admission toEntity(AdmissionDto admissionDto);
     AdmissionDto toDto(Admission admission);
     List<AdmissionDto> toDtos(List<Admission> admissions);

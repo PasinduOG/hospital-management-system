@@ -11,7 +11,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bill")
-public class BillsController {
+public class BillController {
     private final BillImpl service;
     @PostMapping
     public void addBill(@RequestBody BillDto dto){

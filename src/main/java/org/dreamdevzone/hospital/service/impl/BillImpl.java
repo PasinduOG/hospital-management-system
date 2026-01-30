@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.BillMapper;
 import org.dreamdevzone.hospital.model.dto.BillDto;
-import org.dreamdevzone.hospital.repository.BillsRepository;
-import org.dreamdevzone.hospital.service.BillsService;
+import org.dreamdevzone.hospital.repository.BillRepository;
+import org.dreamdevzone.hospital.service.BillService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +13,8 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class BillImpl implements BillsService {
-    private final BillsRepository repository;
+public class BillImpl implements BillService {
+    private final BillRepository repository;
     private final BillMapper mapper;
     @Override
     public void addBill(BillDto dto) {

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.AppointmentMapper;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
-import org.dreamdevzone.hospital.repository.AppointmentsRepository;
+import org.dreamdevzone.hospital.repository.AppointmentRepository;
 import org.dreamdevzone.hospital.service.AppointmentService;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class AppointmentImpl implements AppointmentService {
-    private final AppointmentsRepository repository;
+    private final AppointmentRepository repository;
     private final AppointmentMapper mapper;
     @Override
     public void addAppointment(AppointmentDto dto) {
