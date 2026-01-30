@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RoomService {
-    void addRoom(RoomDto dto);
+    RoomDto addRoom(RoomDto dto);
     RoomDto getRoom(UUID uuid);
     void deleteRoom(UUID uuid);
     List<RoomDto> getAllRooms();

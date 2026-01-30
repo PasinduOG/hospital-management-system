@@ -10,19 +10,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class LabReportServiceImpl implements LabReportService {
+
     private final LabReportRepository repository;
     private final LabReportMapper mapper;
+
     @Override
-    public void addLabReport(LabReportDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public LabReportDto addLabReport(LabReportDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public LabReportDto getLabReport(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()->new BaseNotFoundException("Lab report not found!")));
+        return mapper.toDto(repository.findById(uuid)
+                .orElseThrow(() -> new BaseNotFoundException("Lab report not found!")));
     }
 
     @Override
@@ -37,7 +41,7 @@ public class LabReportServiceImpl implements LabReportService {
 
     @Override
     public LabReportDto updateLabReport(LabReportDto dto, UUID uuid) {
-        if (!repository.existsById(uuid)) throw  new BaseNotFoundException("Lab report not found!");
+        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Lab report not found!");
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

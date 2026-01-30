@@ -4,6 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.LabReportDto;
 import org.dreamdevzone.hospital.service.LabReportService;
+import org.dreamdevzone.hospital.util.ApiResponse;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,24 +17,30 @@ import java.util.UUID;
 @RequestMapping("/labReport")
 public class LabReportController {
     private final LabReportService service;
+
     @PostMapping
-    public void addLabReport(@Valid @RequestBody LabReportDto dto){
-        service.addLabReport(dto);
+    ResponseEntity<@NotNull ApiResponse<LabReportDto>> addLabReport(@Valid @RequestBody LabReportDto dto){
+        return ApiResponse.created("Lab report created!", service.addLabReport(dto));
     }
+
     @GetMapping("/{id}")
-    public LabReportDto searchLabReport(@PathVariable UUID id){
-        return service.getLabReport(id);
+    ResponseEntity<@NotNull ApiResponse<LabReportDto>> searchLabReport(@PathVariable UUID id){
+        return ApiResponse.success("Lab report fetched!", service.getLabReport(id));
     }
+
     @DeleteMapping("/{id}")
-    public void deleteLabReport(@PathVariable UUID id){
+    ResponseEntity<@NotNull ApiResponse<Void>> deleteLabReport(@PathVariable UUID id){
         service.deleteLabReport(id);
+        return ApiResponse.success("Lab report removed!");
     }
+
     @GetMapping
-    public List<LabReportDto> getAllLabReports(){
-        return service.getAllLabReports();
+    ResponseEntity<@NotNull ApiResponse<List<LabReportDto>>> getAllLabReports(){
+        return ApiResponse.success("Fetched lab reports!", service.getAllLabReports());
     }
+
     @PutMapping("/{id}")
-    public LabReportDto updateLabReport(@Valid @RequestBody LabReportDto dto,@PathVariable UUID id){
-        return service.updateLabReport(dto,id);
+    ResponseEntity<@NotNull ApiResponse<LabReportDto>> updateLabReport(@Valid @RequestBody LabReportDto dto, @PathVariable UUID id){
+        return ApiResponse.success("Lab report updated!", service.updateLabReport(dto,id));
     }
 }
