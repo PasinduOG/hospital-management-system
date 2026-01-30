@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AppointmentService {
-    void addAppointment(AppointmentDto dto);
+    AppointmentDto addAppointment(AppointmentDto dto);
     AppointmentDto getAppointment(UUID uuid);
     void deleteAppointment(UUID uuid);
     List<AppointmentDto> getAllAppointments();

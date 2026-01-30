@@ -10,19 +10,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository repository;
     private final AppointmentMapper mapper;
+
     @Override
-    public void addAppointment(AppointmentDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public AppointmentDto addAppointment(AppointmentDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public AppointmentDto getAppointment(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()->new BaseNotFoundException("Appointment not found!")));
+        return mapper.toDto(repository.findById(uuid).
+                orElseThrow(() -> new BaseNotFoundException("Appointment not found!")));
     }
 
     @Override
@@ -37,7 +40,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDto updateAppointment(AppointmentDto dto, UUID uuid) {
-        if(!repository.existsById(uuid)) throw new BaseNotFoundException("Appointment not found!");
+        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Appointment not found!");
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
