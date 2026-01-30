@@ -25,7 +25,7 @@ public class DoctorController {
 
     @GetMapping("/{id}")
     ResponseEntity<@NotNull ApiResponse<DoctorDto>> searchDoctor(@PathVariable UUID id){
-        return ApiResponse.success("Doctor fetched", service.searchDoctor(id));
+        return ApiResponse.success("Doctor fetched!", service.searchDoctor(id));
     }
 
     @DeleteMapping("/{id}")
