@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 @RequiredArgsConstructor
 @Service
-public class DoctorImpl implements DoctorService {
+public class DoctorServiceImpl implements DoctorService {
     private final DoctorMapper mapper;
     private final DoctorRepository repository;
     @Override

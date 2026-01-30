@@ -10,19 +10,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
-public class AdmissionImpl implements AdmissionService {
+public class AdmissionServiceImpl implements AdmissionService {
     private final AdmissionMapper mapper;
     private final AdmissionRepository repository;
+
     @Override
-    public void addAdmission(AdmissionDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public AdmissionDto addAdmission(AdmissionDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public AdmissionDto getAdmission(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()-> new BaseNotFoundException("Admission not found!")));
+        return mapper.toDto(repository.findById(uuid)
+                .orElseThrow(() -> new BaseNotFoundException("Admission not found!")));
     }
 
     @Override
@@ -37,7 +40,7 @@ public class AdmissionImpl implements AdmissionService {
 
     @Override
     public AdmissionDto updateAdmission(AdmissionDto dto, UUID uuid) {
-        if(!repository.existsById(uuid)) throw new BaseNotFoundException("Admission not found!");
+        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Admission not found!");
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

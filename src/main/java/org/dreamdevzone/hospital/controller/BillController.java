@@ -3,7 +3,7 @@ package org.dreamdevzone.hospital.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.BillDto;
-import org.dreamdevzone.hospital.service.impl.BillImpl;
+import org.dreamdevzone.hospital.service.BillService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/bill")
 public class BillController {
-    private final BillImpl service;
+    private final BillService service;
     @PostMapping
     public void addBill(@Valid @RequestBody BillDto dto){
         service.addBill(dto);
