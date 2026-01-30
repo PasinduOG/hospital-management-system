@@ -20,7 +20,7 @@ public class DoctorController {
 
     @PostMapping
     ResponseEntity<@NotNull ApiResponse<DoctorDto>> addDoctor(@Valid @RequestBody DoctorDto dto){
-        return ApiResponse.success("Doctor created!", service.addDoctor(dto));
+        return ApiResponse.created("Doctor created!", service.addDoctor(dto));
     }
 
     @GetMapping("/{id}")

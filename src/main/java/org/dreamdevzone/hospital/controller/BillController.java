@@ -20,7 +20,7 @@ public class BillController {
 
     @PostMapping
     ResponseEntity<@NotNull ApiResponse<BillDto>> addBill(@Valid @RequestBody BillDto dto){
-        return ApiResponse.success("Bill created!", service.addBill(dto));
+        return ApiResponse.created("Bill created", service.addBill(dto));
     }
 
     @GetMapping("/{id}")
