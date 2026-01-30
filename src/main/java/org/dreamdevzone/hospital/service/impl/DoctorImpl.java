@@ -1,6 +1,7 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.DoctorMapper;
 import org.dreamdevzone.hospital.model.dto.DoctorDto;
 import org.dreamdevzone.hospital.repository.DoctorRepository;
@@ -21,7 +22,7 @@ public class DoctorImpl implements DoctorService {
 
     @Override
     public DoctorDto searchDoctor(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).get());
+        return mapper.toDto(repository.findById(uuid).orElseThrow(()-> new BaseNotFoundException("Doctor not found!")));
     }
 
     @Override
@@ -32,5 +33,12 @@ public class DoctorImpl implements DoctorService {
     @Override
     public List<DoctorDto> getDoctors() {
         return mapper.toDtos(repository.findAll());
+    }
+
+    @Override
+    public void updateDoctor(DoctorDto dto, UUID id) {
+        if (!repository.existsById(id)) throw  new BaseNotFoundException("Doctor not found!");
+        dto.setId(id);
+        repository.save(mapper.toEntity(dto));
     }
 }

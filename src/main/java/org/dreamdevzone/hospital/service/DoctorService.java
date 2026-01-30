@@ -10,4 +10,5 @@ public interface DoctorService {
     DoctorDto searchDoctor(UUID uuid);
     void deleteDoctor(UUID uuid);
     List<DoctorDto> getDoctors();
+    void updateDoctor(DoctorDto dto, UUID uuid);
 }

@@ -1,6 +1,7 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.DepartmentMapper;
 import org.dreamdevzone.hospital.model.dto.DepartmentDto;
 import org.dreamdevzone.hospital.repository.DepartmentRepository;
@@ -21,7 +22,7 @@ public class DepartmentImpl implements DepartmentService {
 
     @Override
     public DepartmentDto searchDepartment(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).get());
+        return mapper.toDto(repository.findById(uuid).orElseThrow(()-> new BaseNotFoundException("Department not found!")));
     }
 
     @Override
@@ -32,5 +33,12 @@ public class DepartmentImpl implements DepartmentService {
     @Override
     public List<DepartmentDto> getDepartments() {
         return mapper.toDtos(repository.findAll());
+    }
+
+    @Override
+    public void updateDepartmnt(DepartmentDto dto, UUID uuid) {
+        if(!repository.existsById(uuid)) throw new BaseNotFoundException("Department not found!");
+        dto.setId(uuid);
+        repository.save(mapper.toEntity(dto));
     }
 }
