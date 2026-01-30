@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BillService {
-    void addBill(BillDto dto);
+    BillDto addBill(BillDto dto);
     BillDto getBill(UUID uuid);
     void deleteBill(UUID id);
     List<BillDto> getAllBills();
