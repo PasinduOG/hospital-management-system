@@ -39,6 +39,7 @@ public class PatientController {
 
     @DeleteMapping("/{id}")
     ResponseEntity<@NotNull ApiResponse<Void>> remove(@PathVariable UUID id){
+        service.deletePatient(id);
         return ApiResponse.success("Patient removed!");
     }
 }
