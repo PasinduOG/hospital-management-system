@@ -6,15 +6,17 @@ import org.dreamdevzone.hospital.model.dto.DoctorDto;
 import org.dreamdevzone.hospital.service.DoctorService;
 import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/doctor")
+@SuppressWarnings("unused") // For hide unused warnings for endpoint methods @SuppressWarnings("unused")
 public class DoctorController {
     private final DoctorService service;
 
@@ -35,8 +37,9 @@ public class DoctorController {
     }
 
     @GetMapping
-    ResponseEntity<@NotNull ApiResponse<List<DoctorDto>>> getDoctor(){
-        return ApiResponse.success("Fetched doctors!", service.getDoctors());
+    ResponseEntity<@NotNull ApiResponse<Page<@NotNull DoctorDto>>> getDoctor(Pageable pageable){
+        String message = String.format("Fetched doctors! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        return ApiResponse.success(message, service.getDoctors(pageable));
     }
 
     @PutMapping("/{id}")

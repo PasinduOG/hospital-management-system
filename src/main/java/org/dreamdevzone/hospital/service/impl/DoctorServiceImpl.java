@@ -6,13 +6,16 @@ import org.dreamdevzone.hospital.mapper.DoctorMapper;
 import org.dreamdevzone.hospital.model.dto.DoctorDto;
 import org.dreamdevzone.hospital.repository.DoctorRepository;
 import org.dreamdevzone.hospital.service.DoctorService;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
+@SuppressWarnings("unused")
 public class DoctorServiceImpl implements DoctorService {
     private final DoctorMapper mapper;
     private final DoctorRepository repository;
@@ -34,8 +37,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<DoctorDto> getDoctors() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull DoctorDto> getDoctors(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override
