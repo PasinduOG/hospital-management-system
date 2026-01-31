@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@SuppressWarnings("unused")
 public class OpenApiConfig {
 
     @Bean
@@ -15,7 +16,7 @@ public class OpenApiConfig {
                 new Info()
                         .title("Hospital Management System")
                         .version("1.0.0")
-                        .description("A RESTful API for managing the patients, doctors, and staff in any hospital.")
+                        .description("A REST API for managing the patients, doctors, and staff in any hospital.")
                         .license(new License().name("MIT"))
         );
     }

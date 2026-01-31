@@ -3,20 +3,22 @@ package org.dreamdevzone.hospital.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.DepartmentDto;
-import org.dreamdevzone.hospital.service.impl.DepartmentServiceImpl;
+import org.dreamdevzone.hospital.service.DepartmentService;
 import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/department")
+@SuppressWarnings("unused") // For hide unused warnings for endpoint methods @SuppressWarnings("unused")
 public class DepartmentController {
-    private final DepartmentServiceImpl service;
+    private final DepartmentService service;
 
     @PostMapping
     ResponseEntity<@NotNull ApiResponse<DepartmentDto>> addDepartment(@Valid @RequestBody DepartmentDto dto){
@@ -35,8 +37,9 @@ public class DepartmentController {
     }
 
     @GetMapping
-    ResponseEntity<@NotNull ApiResponse<List<DepartmentDto>>> getDepartments(){
-        return ApiResponse.success("Fetched departments!", service.getDepartments());
+    ResponseEntity<@NotNull ApiResponse<Page<@NotNull DepartmentDto>>> getDepartments(Pageable pageable){
+        String message = String.format("Fetched departments! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        return ApiResponse.success(message, service.getDepartments(pageable));
     }
 
     @PutMapping("/{id}")
