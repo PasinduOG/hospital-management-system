@@ -6,13 +6,16 @@ import org.dreamdevzone.hospital.mapper.AdmissionMapper;
 import org.dreamdevzone.hospital.model.dto.AdmissionDto;
 import org.dreamdevzone.hospital.repository.AdmissionRepository;
 import org.dreamdevzone.hospital.service.AdmissionService;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class AdmissionServiceImpl implements AdmissionService {
     private final AdmissionMapper mapper;
     private final AdmissionRepository repository;
@@ -34,8 +37,8 @@ public class AdmissionServiceImpl implements AdmissionService {
     }
 
     @Override
-    public List<AdmissionDto> getAllAdmissions() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull AdmissionDto> getAllAdmissions(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override

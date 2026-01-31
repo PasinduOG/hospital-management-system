@@ -6,15 +6,17 @@ import org.dreamdevzone.hospital.model.dto.AdmissionDto;
 import org.dreamdevzone.hospital.service.AdmissionService;
 import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admission")
+@SuppressWarnings("unused") // For hide unused warnings for endpoint methods @SuppressWarnings("unused")
 public class AdmissionController {
     private final AdmissionService service;
 
@@ -35,8 +37,9 @@ public class AdmissionController {
     }
 
     @GetMapping
-    public ResponseEntity<@NotNull ApiResponse<List<AdmissionDto>>> getAllAdmissions() {
-        return ApiResponse.success("Fetched admissions!", service.getAllAdmissions());
+    public ResponseEntity<@NotNull ApiResponse<Page<@NotNull AdmissionDto>>> getAllAdmissions(Pageable pageable) {
+        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        return ApiResponse.success(message, service.getAllAdmissions(pageable));
     }
 
     @PutMapping("/{id}")
