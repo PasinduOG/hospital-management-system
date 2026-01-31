@@ -10,19 +10,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 public class RoomServiceImpl implements RoomService {
     private final RoomRepository repository;
     private final RoomMapper mapper;
+
     @Override
-    public void addRoom(RoomDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public RoomDto addRoom(RoomDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public RoomDto getRoom(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()->new BaseNotFoundException("Room not found!")));
+        return mapper.toDto(repository.findById(uuid)
+                .orElseThrow(() -> new BaseNotFoundException("Room not found!")));
     }
 
     @Override

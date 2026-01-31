@@ -13,17 +13,19 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class MealPlanServiceImpl implements MealPlanService{
+public class MealPlanServiceImpl implements MealPlanService {
     private final MealPlanMapper mapper;
     private final MealPlanRepository repository;
+
     @Override
-    public void addMealPlan(MealPlanDto dto) {
-        repository.save(mapper.toEntity(dto));
+    public MealPlanDto addMealPlan(MealPlanDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public MealPlanDto getMealPlan(UUID uuid) {
-        return mapper.toDto(repository.findById(uuid).orElseThrow(()->new BaseNotFoundException("Meal plan not found!")));
+        return mapper.toDto(repository.findById(uuid)
+                .orElseThrow(() -> new BaseNotFoundException("Meal plan not found!")));
     }
 
     @Override

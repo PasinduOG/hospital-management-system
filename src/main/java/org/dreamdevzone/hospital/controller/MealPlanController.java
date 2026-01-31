@@ -4,6 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.MealPlanDto;
 import org.dreamdevzone.hospital.service.MealPlanService;
+import org.dreamdevzone.hospital.util.ApiResponse;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,24 +17,30 @@ import java.util.UUID;
 @RequestMapping("/mealPlan")
 public class MealPlanController {
     private final MealPlanService service;
+
     @PostMapping
-    public void addMealPlan(@Valid @RequestBody MealPlanDto dto){
-        service.addMealPlan(dto);
+    ResponseEntity<@NotNull ApiResponse<MealPlanDto>> addMealPlan(@Valid @RequestBody MealPlanDto dto){
+        return ApiResponse.created("Meal plan created!", service.addMealPlan(dto));
     }
+
     @GetMapping("/{id}")
-    public MealPlanDto getMealPlan(@PathVariable  UUID id){
-        return service.getMealPlan(id);
+    ResponseEntity<@NotNull ApiResponse<MealPlanDto>> getMealPlan(@PathVariable  UUID id){
+        return ApiResponse.success("Meal plan fetched!", service.getMealPlan(id));
     }
+
     @DeleteMapping
-    public void deleteMealPlan(@Valid @RequestBody MealPlanDto dto){
+    ResponseEntity<@NotNull ApiResponse<Void>> deleteMealPlan(@Valid @RequestBody MealPlanDto dto){
         service.deleteMealPlan(dto.getId());
+        return ApiResponse.success("Meal plan removed!");
     }
+
     @GetMapping
-    public List<MealPlanDto> getAllMealPlans(){
-        return service.getAllMealPlans();
+    ResponseEntity<@NotNull ApiResponse<List<MealPlanDto>>> getAllMealPlans(){
+        return ApiResponse.success("Fetched meal plans!", service.getAllMealPlans());
     }
+
     @PutMapping("/{id}")
-    public MealPlanDto updateMealPlan(@Valid @RequestBody MealPlanDto dto, @PathVariable UUID id){
-        return  service.updateMealPlan(dto, id);
+    ResponseEntity<@NotNull ApiResponse<MealPlanDto>> updateMealPlan(@Valid @RequestBody MealPlanDto dto, @PathVariable UUID id){
+        return ApiResponse.success("Meal plan updated!", service.updateMealPlan(dto, id));
     }
 }

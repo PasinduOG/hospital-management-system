@@ -4,6 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.RoomDto;
 import org.dreamdevzone.hospital.service.RoomService;
+import org.dreamdevzone.hospital.util.ApiResponse;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,24 +17,30 @@ import java.util.UUID;
 @RequestMapping("/room")
 public class RoomController {
     private final RoomService service;
+
     @PostMapping
-    public void addRoom(@Valid @RequestBody RoomDto dto){
-        service.addRoom(dto);
+    ResponseEntity<@NotNull ApiResponse<RoomDto>> addRoom(@Valid @RequestBody RoomDto dto){
+        return ApiResponse.created("Room created!", service.addRoom(dto));
     }
+
     @GetMapping("/{id}")
-    public RoomDto getRoom(@PathVariable UUID id){
-        return service.getRoom(id);
+    ResponseEntity<@NotNull ApiResponse<RoomDto>> getRoom(@PathVariable UUID id){
+        return ApiResponse.success("Room fetched!", service.getRoom(id));
     }
+
     @GetMapping
-    public List<RoomDto> findAll(){
-        return service.getAllRooms();
+    ResponseEntity<@NotNull ApiResponse<List<RoomDto>>> findAll(){
+        return ApiResponse.success("Fetched rooms!", service.getAllRooms());
     }
+
     @DeleteMapping
-    public void deleteRoom(@Valid @RequestBody UUID uuid){
+    ResponseEntity<@NotNull ApiResponse<Void>> deleteRoom(@Valid @RequestBody UUID uuid){
         service.deleteRoom(uuid);
+        return ApiResponse.success("Room removed!");
     }
+
     @PutMapping
-    public RoomDto updateRoom(@Valid @RequestBody RoomDto dto){
-        return service.getRoom(dto.getId());
+    ResponseEntity<@NotNull ApiResponse<RoomDto>> updateRoom(@Valid @RequestBody RoomDto dto){
+        return ApiResponse.success("Room updated!", service.getRoom(dto.getId()));
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MealPlanService {
-    void addMealPlan(MealPlanDto dto);
+    MealPlanDto addMealPlan(MealPlanDto dto);
     MealPlanDto getMealPlan(UUID uuid);
     List<MealPlanDto> getAllMealPlans();
     void deleteMealPlan(UUID uuid);
