@@ -38,7 +38,7 @@ public class LabReportController {
 
     @GetMapping
     public ResponseEntity<@NotNull ApiResponse<Page<@NotNull LabReportDto>>> getAllLabReports(Pageable pageable) {
-        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        String message = String.format("Lab reports fetched! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getAllLabReports(pageable));
     }
 
