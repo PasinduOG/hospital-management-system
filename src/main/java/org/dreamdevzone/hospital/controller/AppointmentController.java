@@ -1,10 +1,10 @@
 package org.dreamdevzone.hospital.controller;
 
+import io.github.pasinduog.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
 import org.dreamdevzone.hospital.service.AppointmentService;
-import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
