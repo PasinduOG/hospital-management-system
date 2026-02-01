@@ -38,7 +38,7 @@ public class DepartmentController {
 
     @GetMapping
     public ResponseEntity<@NotNull ApiResponse<Page<@NotNull DepartmentDto>>> getAllDepartments(Pageable pageable) {
-        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        String message = String.format("Departments fetched! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getDepartments(pageable));
     }
 
