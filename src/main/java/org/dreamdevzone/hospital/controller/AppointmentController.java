@@ -38,7 +38,7 @@ public class AppointmentController {
 
     @GetMapping
     public ResponseEntity<@NotNull ApiResponse<Page<@NotNull AppointmentDto>>> getAllAppointments(Pageable pageable) {
-        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        String message = String.format("Fetched appointments! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getAllAppointments(pageable));
     }
 
