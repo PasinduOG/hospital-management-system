@@ -2,7 +2,6 @@ package org.dreamdevzone.hospital.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.model.dto.AdmissionDto;
 import org.dreamdevzone.hospital.model.dto.DoctorDto;
 import org.dreamdevzone.hospital.service.DoctorService;
 import org.dreamdevzone.hospital.util.ApiResponse;
