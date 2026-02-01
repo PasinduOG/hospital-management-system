@@ -38,7 +38,7 @@ public class BillController {
 
     @GetMapping
     public ResponseEntity<@NotNull ApiResponse<Page<@NotNull BillDto>>> getAllBills(Pageable pageable) {
-        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        String message = String.format("Fetched bills! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getAllBills(pageable));
     }
 
