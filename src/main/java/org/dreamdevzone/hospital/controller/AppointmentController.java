@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/appointment")
+@SuppressWarnings("unused")
 public class AppointmentController {
     private final AppointmentService service;
 

@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/department")
+@SuppressWarnings("unused")
 public class DepartmentController {
     private final DepartmentServiceImpl service;
 

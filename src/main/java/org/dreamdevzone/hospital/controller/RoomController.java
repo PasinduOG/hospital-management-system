@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
+@SuppressWarnings("unused")
 public class RoomController {
     private final RoomService service;
 

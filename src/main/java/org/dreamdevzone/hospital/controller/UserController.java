@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class UserController {
     private final UserService service;
 

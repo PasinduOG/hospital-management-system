@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mealPlan")
+@SuppressWarnings("unused")
 public class MealPlanController {
     private final MealPlanService service;
 

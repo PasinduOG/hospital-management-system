@@ -18,6 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/doctor")
+@SuppressWarnings("unused")
 public class DoctorController {
     private final DoctorService service;
 

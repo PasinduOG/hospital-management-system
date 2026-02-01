@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/labReport")
+@SuppressWarnings("unused")
 public class LabReportController {
     private final LabReportService service;
 

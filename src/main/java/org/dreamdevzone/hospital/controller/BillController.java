@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bill")
+@SuppressWarnings("unused")
 public class BillController {
     private final BillService service;
 
