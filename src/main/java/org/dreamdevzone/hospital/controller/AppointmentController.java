@@ -6,10 +6,11 @@ import org.dreamdevzone.hospital.model.dto.AppointmentDto;
 import org.dreamdevzone.hospital.service.AppointmentService;
 import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -35,8 +36,9 @@ public class AppointmentController {
     }
 
     @GetMapping
-    ResponseEntity<@NotNull ApiResponse<List<AppointmentDto>>> getAllAppointments(){
-        return ApiResponse.success("Fetched appointments!", service.getAllAppointments());
+    public ResponseEntity<@NotNull ApiResponse<Page<@NotNull AppointmentDto>>> getAllAppointments(Pageable pageable) {
+        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        return ApiResponse.success(message, service.getAllAppointments(pageable));
     }
 
     @PutMapping("/{id}")

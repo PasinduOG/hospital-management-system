@@ -10,5 +10,4 @@ import java.util.List;
 public interface LabReportMapper {
     LabReportDto toDto(LabReport dto);
     LabReport toEntity(LabReportDto labReportDto);
-    List<LabReportDto> toEntities(List<LabReport> labReports);
 }

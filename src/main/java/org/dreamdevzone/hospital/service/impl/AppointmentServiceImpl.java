@@ -1,11 +1,14 @@
 package org.dreamdevzone.hospital.service.impl;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.AppointmentMapper;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
 import org.dreamdevzone.hospital.repository.AppointmentRepository;
 import org.dreamdevzone.hospital.service.AppointmentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +37,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentDto> getAllAppointments() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull AppointmentDto> getAllAppointments(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override

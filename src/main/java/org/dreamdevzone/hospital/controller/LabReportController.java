@@ -6,10 +6,11 @@ import org.dreamdevzone.hospital.model.dto.LabReportDto;
 import org.dreamdevzone.hospital.service.LabReportService;
 import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -35,8 +36,9 @@ public class LabReportController {
     }
 
     @GetMapping
-    ResponseEntity<@NotNull ApiResponse<List<LabReportDto>>> getAllLabReports(){
-        return ApiResponse.success("Fetched lab reports!", service.getAllLabReports());
+    public ResponseEntity<@NotNull ApiResponse<Page<@NotNull LabReportDto>>> getAllLabReports(Pageable pageable) {
+        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        return ApiResponse.success(message, service.getAllLabReports(pageable));
     }
 
     @PutMapping("/{id}")

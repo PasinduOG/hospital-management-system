@@ -6,10 +6,11 @@ import org.dreamdevzone.hospital.model.dto.DepartmentDto;
 import org.dreamdevzone.hospital.service.impl.DepartmentServiceImpl;
 import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -35,12 +36,13 @@ public class DepartmentController {
     }
 
     @GetMapping
-    ResponseEntity<@NotNull ApiResponse<List<DepartmentDto>>> getDepartments(){
-        return ApiResponse.success("Fetched departments!", service.getDepartments());
+    public ResponseEntity<@NotNull ApiResponse<Page<@NotNull DepartmentDto>>> getAllDepartments(Pageable pageable) {
+        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        return ApiResponse.success(message, service.getDepartments(pageable));
     }
 
     @PutMapping("/{id}")
     ResponseEntity<@NotNull ApiResponse<DepartmentDto>> updateDepartment(@Valid @RequestBody DepartmentDto dto,@PathVariable UUID id){
-        return ApiResponse.success("Department updated!", service.updateDepartmnt(dto,id));
+        return ApiResponse.success("Department updated!", service.updateDepartment(dto,id));
     }
 }

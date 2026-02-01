@@ -1,11 +1,14 @@
 package org.dreamdevzone.hospital.service.impl;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.BillMapper;
 import org.dreamdevzone.hospital.model.dto.BillDto;
 import org.dreamdevzone.hospital.repository.BillRepository;
 import org.dreamdevzone.hospital.service.BillService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +37,8 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public List<BillDto> getAllBills() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull BillDto> getAllBills(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override

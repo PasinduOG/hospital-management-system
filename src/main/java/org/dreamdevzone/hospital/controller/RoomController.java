@@ -6,10 +6,11 @@ import org.dreamdevzone.hospital.model.dto.RoomDto;
 import org.dreamdevzone.hospital.service.RoomService;
 import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,10 +30,10 @@ public class RoomController {
     }
 
     @GetMapping
-    ResponseEntity<@NotNull ApiResponse<List<RoomDto>>> findAll(){
-        return ApiResponse.success("Fetched rooms!", service.getAllRooms());
+    public ResponseEntity<@NotNull ApiResponse<Page<@NotNull RoomDto>>> getAllRooms(Pageable pageable) {
+        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        return ApiResponse.success(message, service.getAllRooms(pageable));
     }
-
     @DeleteMapping
     ResponseEntity<@NotNull ApiResponse<Void>> deleteRoom(@Valid @RequestBody UUID uuid){
         service.deleteRoom(uuid);

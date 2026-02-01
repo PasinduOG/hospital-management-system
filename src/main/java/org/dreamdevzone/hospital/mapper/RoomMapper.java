@@ -10,5 +10,4 @@ import java.util.List;
 public interface RoomMapper {
     RoomDto toDto(Room room);
     Room toEntity(RoomDto dto);
-    List<RoomDto> toDtos(List<Room> rooms);
 }

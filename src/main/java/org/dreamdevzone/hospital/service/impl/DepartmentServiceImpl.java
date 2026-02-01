@@ -1,11 +1,14 @@
 package org.dreamdevzone.hospital.service.impl;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.DepartmentMapper;
 import org.dreamdevzone.hospital.model.dto.DepartmentDto;
 import org.dreamdevzone.hospital.repository.DepartmentRepository;
 import org.dreamdevzone.hospital.service.DepartmentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,12 +37,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentDto> getDepartments() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull DepartmentDto> getDepartments(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
-
     @Override
-    public DepartmentDto updateDepartmnt(DepartmentDto dto, UUID uuid) {
+    public DepartmentDto updateDepartment(DepartmentDto dto, UUID uuid) {
         if (!repository.existsById(uuid)) throw new BaseNotFoundException("Department not found!");
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));

@@ -1,11 +1,14 @@
 package org.dreamdevzone.hospital.service.impl;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.LabReportMapper;
 import org.dreamdevzone.hospital.model.dto.LabReportDto;
 import org.dreamdevzone.hospital.repository.LabReportRepository;
 import org.dreamdevzone.hospital.service.LabReportService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,8 +38,8 @@ public class LabReportServiceImpl implements LabReportService {
     }
 
     @Override
-    public List<LabReportDto> getAllLabReports() {
-        return mapper.toEntities(repository.findAll());
+    public Page<@NotNull LabReportDto> getAllLabReports(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override
