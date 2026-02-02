@@ -1,6 +1,6 @@
 package org.dreamdevzone.hospital.controller;
 
-import io.github.pasinduog.ApiResponse;
+import io.github.pasinduog.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
