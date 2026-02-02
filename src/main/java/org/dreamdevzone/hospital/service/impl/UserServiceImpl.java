@@ -1,11 +1,14 @@
 package org.dreamdevzone.hospital.service.impl;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.exception.BaseNotFoundException;
 import org.dreamdevzone.hospital.mapper.UserMapper;
 import org.dreamdevzone.hospital.model.dto.UserDto;
 import org.dreamdevzone.hospital.repository.UserRepository;
 import org.dreamdevzone.hospital.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,10 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAll() {
-        return repository.findAll().stream()
-                .map(mapper::toDto).toList();
+    public Page<@NotNull UserDto> getAll(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
-
-
 }
