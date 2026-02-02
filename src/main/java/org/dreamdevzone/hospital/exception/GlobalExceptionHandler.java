@@ -1,6 +1,6 @@
 package org.dreamdevzone.hospital.exception;
 
-import io.github.pasinduog.ApiResponse;
+import io.github.pasinduog.dto.ApiResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
