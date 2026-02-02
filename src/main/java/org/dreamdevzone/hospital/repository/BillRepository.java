@@ -1,9 +1,10 @@
 package org.dreamdevzone.hospital.repository;
 
 import org.dreamdevzone.hospital.model.entity.Bill;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface BillRepository extends JpaRepository<Bill, UUID> {
+public interface BillRepository extends JpaRepository<@NotNull Bill, @NotNull UUID> {
 }

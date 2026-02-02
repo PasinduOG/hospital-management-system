@@ -1,14 +1,16 @@
 package org.dreamdevzone.hospital.service;
 
 import org.dreamdevzone.hospital.model.dto.BillDto;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface BillService {
     BillDto addBill(BillDto dto);
     BillDto getBill(UUID uuid);
     void deleteBill(UUID id);
-    List<BillDto> getAllBills();
+    Page<@NotNull BillDto> getAllBills(Pageable pageable);
     BillDto updateBill(BillDto dto, UUID uuid);
 }

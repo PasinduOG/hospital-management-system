@@ -6,13 +6,16 @@ import org.dreamdevzone.hospital.mapper.DepartmentMapper;
 import org.dreamdevzone.hospital.model.dto.DepartmentDto;
 import org.dreamdevzone.hospital.repository.DepartmentRepository;
 import org.dreamdevzone.hospital.service.DepartmentService;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository repository;
     private final DepartmentMapper mapper;
@@ -34,8 +37,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentDto> getDepartments() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull DepartmentDto> getDepartments(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override

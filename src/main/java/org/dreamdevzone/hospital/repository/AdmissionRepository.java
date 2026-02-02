@@ -1,9 +1,10 @@
 package org.dreamdevzone.hospital.repository;
 
 import org.dreamdevzone.hospital.model.entity.Admission;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface AdmissionRepository extends JpaRepository<Admission, UUID> {
+public interface AdmissionRepository extends JpaRepository<@NotNull Admission, @NotNull UUID> {
 }

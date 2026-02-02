@@ -1,10 +1,10 @@
 package org.dreamdevzone.hospital.controller;
 
+import io.github.pasinduog.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.MealPlanDto;
 import org.dreamdevzone.hospital.service.MealPlanService;
-import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +15,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mealPlan")
+@SuppressWarnings("unused")  // For hide unused warnings for endpoint methods @SuppressWarnings("unused")
 public class MealPlanController {
     private final MealPlanService service;
 
