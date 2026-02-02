@@ -2,6 +2,7 @@ package org.dreamdevzone.hospital.service;
 
 import jakarta.validation.constraints.NotNull;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

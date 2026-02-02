@@ -7,15 +7,16 @@ import org.dreamdevzone.hospital.mapper.AppointmentMapper;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
 import org.dreamdevzone.hospital.repository.AppointmentRepository;
 import org.dreamdevzone.hospital.service.AppointmentService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository repository;
     private final AppointmentMapper mapper;

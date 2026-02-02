@@ -1,10 +1,10 @@
 package org.dreamdevzone.hospital.controller;
 
+import io.github.pasinduog.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.UserDto;
 import org.dreamdevzone.hospital.service.UserService;
-import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
-@SuppressWarnings("unused")
+@SuppressWarnings("unused")  // For hide unused warnings for endpoint methods @SuppressWarnings("unused")
 public class UserController {
     private final UserService service;
 

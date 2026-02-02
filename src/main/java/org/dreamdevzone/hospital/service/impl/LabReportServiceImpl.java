@@ -7,15 +7,16 @@ import org.dreamdevzone.hospital.mapper.LabReportMapper;
 import org.dreamdevzone.hospital.model.dto.LabReportDto;
 import org.dreamdevzone.hospital.repository.LabReportRepository;
 import org.dreamdevzone.hospital.service.LabReportService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class LabReportServiceImpl implements LabReportService {
 
     private final LabReportRepository repository;

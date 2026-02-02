@@ -1,10 +1,10 @@
 package org.dreamdevzone.hospital.controller;
 
+import io.github.pasinduog.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.dreamdevzone.hospital.model.dto.BillDto;
 import org.dreamdevzone.hospital.service.BillService;
-import org.dreamdevzone.hospital.util.ApiResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bill")
-@SuppressWarnings("unused")
+@SuppressWarnings("unused")  // For hide unused warnings for endpoint methods @SuppressWarnings("unused")
 public class BillController {
     private final BillService service;
 
@@ -37,8 +37,8 @@ public class BillController {
     }
 
     @GetMapping
-    public ResponseEntity<@NotNull ApiResponse<Page<@NotNull BillDto>>> getAllBills(Pageable pageable) {
-        String message = String.format("Fetched bills! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+    ResponseEntity<@NotNull ApiResponse<Page<@NotNull BillDto>>> getAllBills(Pageable pageable){
+        String message = String.format("Fetched bills page %d of size %d!", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getAllBills(pageable));
     }
 

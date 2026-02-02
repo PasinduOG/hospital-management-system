@@ -7,15 +7,16 @@ import org.dreamdevzone.hospital.mapper.BillMapper;
 import org.dreamdevzone.hospital.model.dto.BillDto;
 import org.dreamdevzone.hospital.repository.BillRepository;
 import org.dreamdevzone.hospital.service.BillService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class BillServiceImpl implements BillService {
     private final BillRepository repository;
     private final BillMapper mapper;

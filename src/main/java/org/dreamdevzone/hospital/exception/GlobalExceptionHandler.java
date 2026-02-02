@@ -1,6 +1,6 @@
 package org.dreamdevzone.hospital.exception;
 
-import org.dreamdevzone.hospital.util.ApiResponse;
+import io.github.pasinduog.dto.ApiResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +12,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.Objects;
 
 @RestControllerAdvice
+@SuppressWarnings("unused")
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BaseNotFoundException.class)
