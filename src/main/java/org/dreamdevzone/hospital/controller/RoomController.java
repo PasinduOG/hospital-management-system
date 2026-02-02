@@ -32,7 +32,7 @@ public class RoomController {
 
     @GetMapping
     public ResponseEntity<@NotNull ApiResponse<Page<@NotNull RoomDto>>> getAllRooms(Pageable pageable) {
-        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        String message = String.format("Fetched rooms! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getAllRooms(pageable));
     }
     @DeleteMapping

@@ -32,7 +32,7 @@ public class PatientController {
 
     @GetMapping
     public ResponseEntity<@NotNull ApiResponse<Page<@NotNull PatientDto>>> getAllPatients(Pageable pageable) {
-        String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
+        String message = String.format("Fetched patients! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getAllPatients(pageable));
     }
 
