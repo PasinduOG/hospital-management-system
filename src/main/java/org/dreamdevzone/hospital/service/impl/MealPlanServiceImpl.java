@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class MealPlanServiceImpl implements MealPlanService {
     private final MealPlanMapper mapper;
     private final MealPlanRepository repository;

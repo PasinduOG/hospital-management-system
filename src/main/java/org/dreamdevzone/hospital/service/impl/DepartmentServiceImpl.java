@@ -43,7 +43,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDto updateDepartmnt(DepartmentDto dto, UUID uuid) {
+    public DepartmentDto updateDepartment(DepartmentDto dto, UUID uuid) {
         if (!repository.existsById(uuid)) throw new ResourceNotFoundException("Department not found!", HttpStatus.NOT_FOUND);
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));

@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
+@SuppressWarnings("unused")
 public class RoomServiceImpl implements RoomService {
     private final RoomRepository repository;
     private final RoomMapper mapper;

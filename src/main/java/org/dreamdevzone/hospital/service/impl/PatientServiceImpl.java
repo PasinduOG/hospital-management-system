@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class PatientServiceImpl implements PatientService {
     private final PatientRepository repository;
     private final PatientMapper mapper;
