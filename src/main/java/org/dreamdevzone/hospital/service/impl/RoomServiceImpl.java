@@ -6,10 +6,12 @@ import org.dreamdevzone.hospital.mapper.RoomMapper;
 import org.dreamdevzone.hospital.model.dto.RoomDto;
 import org.dreamdevzone.hospital.repository.RoomRepository;
 import org.dreamdevzone.hospital.service.RoomService;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -35,8 +37,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<RoomDto> getAllRooms() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull RoomDto> getAllRooms(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override

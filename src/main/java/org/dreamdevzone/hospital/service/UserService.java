@@ -1,8 +1,10 @@
 package org.dreamdevzone.hospital.service;
 
+import jakarta.validation.constraints.NotNull;
 import org.dreamdevzone.hospital.model.dto.UserDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
@@ -10,5 +12,5 @@ public interface UserService {
     UserDto updateUser(UserDto userDto, UUID uuid);
     UserDto getUser(UUID uuid);
     void deleteUser(UUID uuid);
-    List<UserDto> getAll();
+    Page<@NotNull UserDto> getAll(Pageable pageable);
 }

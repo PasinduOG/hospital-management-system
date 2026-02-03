@@ -6,10 +6,12 @@ import org.dreamdevzone.hospital.mapper.PatientMapper;
 import org.dreamdevzone.hospital.model.dto.PatientDto;
 import org.dreamdevzone.hospital.repository.PatientRepository;
 import org.dreamdevzone.hospital.service.PatientService;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -42,8 +44,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientDto> getAllPatients() {
-        return repository.findAll().stream()
-                .map(mapper::toDto).toList();
+    public Page<@NotNull PatientDto> getAllPatients(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 }

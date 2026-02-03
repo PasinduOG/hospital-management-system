@@ -44,6 +44,6 @@ public class DepartmentController {
 
     @PutMapping("/{id}")
     ResponseEntity<@NotNull ApiResponse<DepartmentDto>> updateDepartment(@Valid @RequestBody DepartmentDto dto,@PathVariable UUID id){
-        return ApiResponse.success("Department updated!", service.updateDepartmnt(dto,id));
+        return ApiResponse.success("Department updated!", service.updateDepartment(dto,id));
     }
 }

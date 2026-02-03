@@ -6,6 +6,9 @@ import org.dreamdevzone.hospital.mapper.UserMapper;
 import org.dreamdevzone.hospital.model.dto.UserDto;
 import org.dreamdevzone.hospital.repository.UserRepository;
 import org.dreamdevzone.hospital.service.UserService;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -43,9 +46,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAll() {
-        return repository.findAll().stream()
-                .map(mapper::toDto).toList();
+    public Page<@NotNull UserDto> getAll(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
 

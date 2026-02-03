@@ -6,10 +6,12 @@ import org.dreamdevzone.hospital.mapper.MealPlanMapper;
 import org.dreamdevzone.hospital.model.dto.MealPlanDto;
 import org.dreamdevzone.hospital.repository.MealPlanRepository;
 import org.dreamdevzone.hospital.service.MealPlanService;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,8 +32,8 @@ public class MealPlanServiceImpl implements MealPlanService {
     }
 
     @Override
-    public List<MealPlanDto> getAllMealPlans() {
-        return mapper.toDtos(repository.findAll());
+    public Page<@NotNull MealPlanDto> getAllMealPlans(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override
