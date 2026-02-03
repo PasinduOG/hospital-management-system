@@ -9,8 +9,12 @@ import java.util.UUID;
 
 public interface RoomService {
     RoomDto addRoom(RoomDto dto);
+
     RoomDto getRoom(UUID uuid);
+
     void deleteRoom(UUID uuid);
+
     Page<@NotNull RoomDto> getAllRooms(Pageable pageable);
-    RoomDto updateRoom(RoomDto dto,UUID uuid);
+
+    RoomDto updateRoom(RoomDto dto, UUID uuid);
 }
