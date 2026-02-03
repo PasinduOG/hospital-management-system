@@ -1,11 +1,12 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.UserMapper;
 import org.dreamdevzone.hospital.model.dto.UserDto;
 import org.dreamdevzone.hospital.repository.UserRepository;
 import org.dreamdevzone.hospital.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto userDto, UUID uuid) {
-        if (!repository.existsById(uuid)) throw new BaseNotFoundException("User not found!");
+        if (!repository.existsById(uuid)) throw new ResourceNotFoundException("User not found!", HttpStatus.NOT_FOUND);
         userDto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(userDto)));
     }
@@ -32,7 +33,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUser(UUID uuid) {
         return mapper.toDto(repository.findById(uuid)
-                .orElseThrow(() -> new BaseNotFoundException("User not found!")));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found!", HttpStatus.NOT_FOUND)));
+
     }
 
     @Override

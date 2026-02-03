@@ -1,11 +1,12 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.PatientMapper;
 import org.dreamdevzone.hospital.model.dto.PatientDto;
 import org.dreamdevzone.hospital.repository.PatientRepository;
 import org.dreamdevzone.hospital.service.PatientService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +26,12 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public PatientDto getPatient(UUID id) {
         return mapper.toDto(repository.findById(id)
-                .orElseThrow(() -> new BaseNotFoundException("Patient not found!")));
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found!", HttpStatus.NOT_FOUND)));
     }
 
     @Override
     public PatientDto updatePatient(PatientDto patientDto, UUID id) {
-        if (!repository.existsById(id)) throw new BaseNotFoundException("Patient not found!");
+        if (!repository.existsById(id)) throw new ResourceNotFoundException("Patient not found!", HttpStatus.NOT_FOUND);
         patientDto.setPatientId(id);
         return mapper.toDto(repository.save(mapper.toEntity(patientDto)));
     }

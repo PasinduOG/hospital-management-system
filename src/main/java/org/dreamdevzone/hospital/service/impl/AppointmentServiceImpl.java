@@ -1,7 +1,7 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.AppointmentMapper;
 import org.dreamdevzone.hospital.model.dto.AppointmentDto;
 import org.dreamdevzone.hospital.repository.AppointmentRepository;
@@ -9,6 +9,7 @@ import org.dreamdevzone.hospital.service.AppointmentService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public AppointmentDto getAppointment(UUID uuid) {
         return mapper.toDto(repository.findById(uuid).
-                orElseThrow(() -> new BaseNotFoundException("Appointment not found!")));
+                orElseThrow(() -> new ResourceNotFoundException("Appointment not found!", HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDto updateAppointment(AppointmentDto dto, UUID uuid) {
-        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Appointment not found!");
+        if (!repository.existsById(uuid)) throw new ResourceNotFoundException("Appointment not found!", HttpStatus.NOT_FOUND);
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

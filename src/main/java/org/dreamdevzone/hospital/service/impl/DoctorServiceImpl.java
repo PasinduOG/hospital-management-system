@@ -1,7 +1,7 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.DoctorMapper;
 import org.dreamdevzone.hospital.model.dto.DoctorDto;
 import org.dreamdevzone.hospital.repository.DoctorRepository;
@@ -9,6 +9,7 @@ import org.dreamdevzone.hospital.service.DoctorService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorDto searchDoctor(UUID uuid) {
         return mapper.toDto(repository.findById(uuid)
-                .orElseThrow(() -> new BaseNotFoundException("Doctor not found!")));
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found!", HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorDto updateDoctor(DoctorDto dto, UUID id) {
-        if (!repository.existsById(id)) throw new BaseNotFoundException("Doctor not found!");
+        if (!repository.existsById(id)) throw new ResourceNotFoundException("Doctor not found!", HttpStatus.NOT_FOUND);
         dto.setId(id);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

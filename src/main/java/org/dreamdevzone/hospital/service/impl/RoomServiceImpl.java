@@ -1,11 +1,12 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.RoomMapper;
 import org.dreamdevzone.hospital.model.dto.RoomDto;
 import org.dreamdevzone.hospital.repository.RoomRepository;
 import org.dreamdevzone.hospital.service.RoomService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDto getRoom(UUID uuid) {
         return mapper.toDto(repository.findById(uuid)
-                .orElseThrow(() -> new BaseNotFoundException("Room not found!")));
+                .orElseThrow(() -> new ResourceNotFoundException("Room not found!", HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -40,7 +41,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomDto updateRoom(RoomDto dto, UUID uuid) {
-        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Room not found!");
+        if (!repository.existsById(uuid)) throw new ResourceNotFoundException("Room not found!", HttpStatus.NOT_FOUND);
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

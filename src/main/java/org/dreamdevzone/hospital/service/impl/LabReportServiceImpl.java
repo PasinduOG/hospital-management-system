@@ -1,7 +1,7 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.LabReportMapper;
 import org.dreamdevzone.hospital.model.dto.LabReportDto;
 import org.dreamdevzone.hospital.repository.LabReportRepository;
@@ -9,6 +9,7 @@ import org.dreamdevzone.hospital.service.LabReportService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -29,7 +30,7 @@ public class LabReportServiceImpl implements LabReportService {
     @Override
     public LabReportDto getLabReport(UUID uuid) {
         return mapper.toDto(repository.findById(uuid)
-                .orElseThrow(() -> new BaseNotFoundException("Lab report not found!")));
+                .orElseThrow(() -> new ResourceNotFoundException("Lab report not found!", HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -44,7 +45,7 @@ public class LabReportServiceImpl implements LabReportService {
 
     @Override
     public LabReportDto updateLabReport(LabReportDto dto, UUID uuid) {
-        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Lab report not found!");
+        if (!repository.existsById(uuid)) throw new ResourceNotFoundException("Lab report not found!", HttpStatus.NOT_FOUND);
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
