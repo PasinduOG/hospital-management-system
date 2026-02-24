@@ -1,7 +1,7 @@
 package org.dreamdevzone.hospital.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.AdmissionMapper;
 import org.dreamdevzone.hospital.model.dto.AdmissionDto;
 import org.dreamdevzone.hospital.repository.AdmissionRepository;
@@ -9,6 +9,7 @@ import org.dreamdevzone.hospital.service.AdmissionService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class AdmissionServiceImpl implements AdmissionService {
     @Override
     public AdmissionDto getAdmission(UUID uuid) {
         return mapper.toDto(repository.findById(uuid)
-                .orElseThrow(() -> new BaseNotFoundException("Admission not found!")));
+                .orElseThrow(() -> new ResourceNotFoundException("Admission not found with ID: " + uuid, HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -43,7 +44,8 @@ public class AdmissionServiceImpl implements AdmissionService {
 
     @Override
     public AdmissionDto updateAdmission(AdmissionDto dto, UUID uuid) {
-        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Admission not found!");
+        if (!repository.existsById(uuid))
+            throw new ResourceNotFoundException("Admission not found with ID: " + uuid, HttpStatus.NOT_FOUND);
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

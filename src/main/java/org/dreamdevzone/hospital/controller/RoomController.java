@@ -35,14 +35,14 @@ public class RoomController {
         String message = String.format("Fetched admissions! Page number: %d, Page size: %d", pageable.getPageNumber(), pageable.getPageSize());
         return ApiResponse.success(message, service.getAllRooms(pageable));
     }
-    @DeleteMapping
-    ResponseEntity<@NotNull ApiResponse<Void>> deleteRoom(@Valid @RequestBody UUID uuid){
-        service.deleteRoom(uuid);
+    @DeleteMapping("/{id}")
+    ResponseEntity<@NotNull ApiResponse<Void>> deleteRoom(@PathVariable UUID id){
+        service.deleteRoom(id);
         return ApiResponse.success("Room removed!");
     }
 
-    @PutMapping
-    ResponseEntity<@NotNull ApiResponse<RoomDto>> updateRoom(@Valid @RequestBody RoomDto dto){
-        return ApiResponse.success("Room updated!", service.getRoom(dto.getId()));
+    @PutMapping("/{id}")
+    ResponseEntity<@NotNull ApiResponse<RoomDto>> updateRoom(@Valid @RequestBody RoomDto dto, @PathVariable UUID id){
+        return ApiResponse.success("Room updated!", service.updateRoom(dto, id));
     }
 }

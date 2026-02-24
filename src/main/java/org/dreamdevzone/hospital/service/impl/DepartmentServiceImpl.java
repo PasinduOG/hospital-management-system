@@ -1,8 +1,7 @@
 package org.dreamdevzone.hospital.service.impl;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.dreamdevzone.hospital.exception.BaseNotFoundException;
+import org.dreamdevzone.hospital.exception.ResourceNotFoundException;
 import org.dreamdevzone.hospital.mapper.DepartmentMapper;
 import org.dreamdevzone.hospital.model.dto.DepartmentDto;
 import org.dreamdevzone.hospital.repository.DepartmentRepository;
@@ -10,6 +9,7 @@ import org.dreamdevzone.hospital.service.DepartmentService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -29,7 +29,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentDto searchDepartment(UUID uuid) {
         return mapper.toDto(repository.findById(uuid)
-                .orElseThrow(() -> new BaseNotFoundException("Department not found!")));
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found!", HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -41,9 +41,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Page<@NotNull DepartmentDto> getDepartments(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::toDto);
     }
+
     @Override
     public DepartmentDto updateDepartment(DepartmentDto dto, UUID uuid) {
-        if (!repository.existsById(uuid)) throw new BaseNotFoundException("Department not found!");
+        if (!repository.existsById(uuid)) throw new ResourceNotFoundException("Department not found!", HttpStatus.NOT_FOUND);
         dto.setId(uuid);
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
